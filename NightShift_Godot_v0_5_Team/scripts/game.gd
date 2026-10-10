@@ -17,6 +17,10 @@ var modal_open = true
 var ended = false
 var reading_rules = false
 var pending_autosave = false
+var front_right_panel: StaticBody3D
+var sensor_delay = 0.0
+var door_clear_time = 0.0
+var motor: AudioStreamPlayer3D
 var hud: CanvasLayer
 var clock_label: Label
 var task_label: Label
@@ -102,11 +106,20 @@ func _process(delta: float) -> void:
 		return
 	var front = registry["front_door"] as NSInteractable
 	var entrance = Vector3(0, 0, 6)
-	var should_open = Vector2(player.position.x, player.position.z - 6).length() < 2.0
-	if customer.visible and customer.position.distance_to(entrance) < 2.8:
-		should_open = true
-	if front.door_open != should_open and power_on:
-		set_door(front, should_open)
+	var detected = absf(player.position.x) < 1.85 and absf(player.position.z - 6) < 2.2
+	if customer.visible and absf(customer.position.x) < 1.85 and absf(customer.position.z - 6) < 2.2:
+		detected = true
+	if power_on:
+		if detected:
+			sensor_delay += delta
+			door_clear_time = 0.0
+			if (sensor_delay >= 0.45 or front.position.x < -0.8) and not front.door_open:
+				set_door(front, true)
+		else:
+			sensor_delay = 0.0
+			door_clear_time += delta
+			if front.door_open and door_clear_time >= 3.0:
+				set_door(front, false)
 	var dawn = clampf((time.minutes - 320.0) / 100.0, 0, 1)
 	environment.background_color = Color("07101c").lerp(Color("536774"), dawn)
 	environment.ambient_light_energy = lerpf(0.35, 0.67, dawn)
@@ -199,7 +212,10 @@ func interact(obj: NSInteractable, index: int) -> void:
 				pending_autosave = true
 			play_sound("place")
 		"door":
-			set_door(obj, not obj.door_open)
+			if obj.stable_id == "front_door":
+				toast("자동문 · 센서 감지로 열립니다")
+			else:
+				set_door(obj, not obj.door_open)
 		"scanner":
 			if not power_on:
 				toast("전원이 없습니다 · 차단기를 확인하세요")
@@ -289,6 +305,26 @@ func set_door(obj: NSInteractable, opened: bool, instant: bool = false) -> void:
 	obj.door_open = opened
 	if door_tweens.has(obj.stable_id) and is_instance_valid(door_tweens[obj.stable_id]):
 		door_tweens[obj.stable_id].kill()
+	if obj.stable_id == "front_door":
+		var x_left = -1.95 if opened else -0.65
+		var x_right = 1.95 if opened else 0.65
+		if instant:
+			obj.position.x = x_left
+			front_right_panel.position.x = x_right
+		else:
+			var slide = create_tween().set_parallel(true)
+			door_tweens[obj.stable_id] = slide
+			slide.tween_property(obj, "position:x", x_left, 1.1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+			slide.tween_property(front_right_panel, "position:x", x_right, 1.1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+			if not is_instance_valid(motor):
+				motor = AudioStreamPlayer3D.new()
+				world.add_child(motor)
+				motor.position = Vector3(0, 2.8, 6)
+				motor.stream = load("res://assets/door_motor.wav")
+				motor.volume_db = -12
+				motor.max_distance = 15
+			motor.play()
+		return
 	var angle = deg_to_rad(-95.0) if opened else 0.0
 	if instant:
 		obj.pivot.rotation.y = angle

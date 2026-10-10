@@ -24,6 +24,13 @@ func build(owner_game: Node3D) -> void:
 	env.environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 	env.environment.ambient_light_color = Color("7895b0")
 	env.environment.ambient_light_energy = 0.35
+	var sky = Sky.new()
+	var sky_material = ProceduralSkyMaterial.new()
+	sky_material.sky_top_color = Color("091421")
+	sky_material.sky_horizon_color = Color("637888")
+	sky.sky_material = sky_material
+	env.environment.sky = sky
+	env.environment.reflected_light_source = Environment.REFLECTION_SOURCE_SKY
 	game.environment = env.environment
 	var moon = DirectionalLight3D.new()
 	world.add_child(moon)
@@ -58,7 +65,7 @@ func build(owner_game: Node3D) -> void:
 		box(Vector3(x, 3.0, 6), Vector3(5.7, 0.6, 0.2), DARK)
 		for dx in [-2.7, 0, 2.7]:
 			box(Vector3(x + dx, 1.8, 6), Vector3(0.06, 2.0, 0.12), DARK)
-	door("front_door", "정문 · 자동 감지", marker_position("H_front_door", Vector3(-1.3, 0, 6)), 2.6, true)
+	sliding_entrance()
 	box(Vector3(0, 3.02, 6.15), Vector3(14.5, 0.55, 0.3), Color("52318b"))
 	label("Nice to   CU", Vector3(0, 3.03, 6.33), 90, Color("b6ee37"))
 	label("24 HOURS   /   CONVENIENCE STORE", Vector3(0, 2.68, 6.32), 28, WHITE)
@@ -206,3 +213,31 @@ func apply_drink_visuals() -> void:
 		item.visual.visible = false
 		NSGeometry.cylinder(item, Vector3.ZERO, 0.075, 0.26, TEAL if i % 2 else AMBER)
 		NSGeometry.cylinder(item, Vector3(0, 0.16, 0), 0.033, 0.07, WHITE)
+
+func sliding_entrance() -> void:
+	var left = game.make_interactable("front_door", "정문 · 자동 센서", "door", Vector3(-0.65, 1.25, 6), Vector3(1.3, 2.5, 0.08), Color(0.55, 0.72, 0.78, 0.22))
+	left.pivot = left
+	var right = StaticBody3D.new()
+	right.name = "RightPanel"
+	world.add_child(right)
+	right.position = Vector3(0.65, 1.25, 6)
+	var mesh = MeshInstance3D.new()
+	var pane = BoxMesh.new()
+	pane.size = Vector3(1.3, 2.5, 0.08)
+	mesh.mesh = pane
+	mesh.material_override = load("res://visuals/environment/Glass.tres")
+	right.add_child(mesh)
+	var collision = CollisionShape3D.new()
+	var shape = BoxShape3D.new()
+	shape.size = pane.size
+	collision.shape = shape
+	right.add_child(collision)
+	for panel in [left, right]:
+		for x in [-0.63, 0.63]:
+			NSGeometry.box(panel, Vector3(x, 0, 0), Vector3(0.035, 2.5, 0.10), DARK, false)
+		for y in [-1.23, 1.23]:
+			NSGeometry.box(panel, Vector3(0, y, 0), Vector3(1.3, 0.035, 0.10), DARK, false)
+		NSGeometry.box(panel, Vector3(0, 0.05, 0.055), Vector3(1.2, 0.08, 0.012), Color("b2c4cc"), false)
+		NSGeometry.text(panel, "AUTO", Vector3(0, 0.20, 0.07), 18, WHITE)
+	left.visual.get_child(0).material_override = load("res://visuals/environment/Glass.tres")
+	game.front_right_panel = right

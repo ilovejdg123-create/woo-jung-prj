@@ -1,1 +1,1 @@
-v0.5 Collaboration split
+v0.6 Sliding automatic entrance, reflective glass, run motion, rounded humanoid visual models

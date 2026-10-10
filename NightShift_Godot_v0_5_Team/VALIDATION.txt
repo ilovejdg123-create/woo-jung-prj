@@ -11,6 +11,14 @@ PASS: Counter device dimensions are positive
 PASS: POS and scanner are separated
 PASS: World and all interactable IDs built
 PASS: Visible body and independent hands exist
+PASS: Sensor delay does not open instantly
+PASS: Sensor opens after recognition delay
+PASS: Two door panels slide apart
+PASS: Door holds open after leaving sensor
+PASS: Door closes after clear interval
+PASS: Closing door reopens on obstruction
+PASS: Glass has sky reflection source
+PASS: Run bob tuning exceeds walking bob
 PASS: Empty hand can grab
 PASS: Two different items held simultaneously
 PASS: Full hand cannot duplicate/pick another item
@@ -41,6 +49,6 @@ PASS: Animated Reach -> Grab -> Hold completes
 PASS: Release drops held item
 PASS: Customer walks in, browses and presents an order
 PASS: 07:00 caps clock and finishes shift
-RESULT: 41/41 passed
+RESULT: 49/49 passed
 
-실제 렌더 화면은 디스플레이 서버가 없어 미검증
+실제 렌더 화면 검증은 수행하지 못함

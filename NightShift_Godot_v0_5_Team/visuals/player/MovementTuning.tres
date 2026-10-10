@@ -2,9 +2,11 @@
 [ext_resource type="Script" path="res://scripts/movement_tuning.gd" id="1"]
 [resource]
 script = ExtResource("1")
-walk_speed = 2.35
-run_speed = 3.6
+walk_speed = 2.8
+run_speed = 5.0
 fov = 77.0
 stride_rate = 4.1
 leg_swing = 0.34
 head_bob = 0.009
+run_bob = 0.025
+run_roll = 0.018

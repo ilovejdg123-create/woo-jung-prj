@@ -4,43 +4,61 @@
 albedo_color = Color(0.12549, 0.290196, 0.294118, 1)
 roughness = 0.72
 
-[sub_resource type="BoxMesh" id="BoxMesh_jdkhb"]
-size = Vector3(0.43, 0.57, 0.26)
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_7b2o6"]
+radius = 0.215
+height = 0.57
+radial_segments = 24
+rings = 12
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x7ndu"]
 albedo_color = Color(0.0862745, 0.117647, 0.156863, 1)
 roughness = 0.72
 
-[sub_resource type="BoxMesh" id="BoxMesh_l2oyd"]
-size = Vector3(0.38, 0.16, 0.25)
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_jdkhb"]
+radius = 0.08
+height = 0.16
+radial_segments = 24
+rings = 12
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gfces"]
 albedo_color = Color(0.12549, 0.160784, 0.211765, 1)
 roughness = 0.72
 
-[sub_resource type="BoxMesh" id="BoxMesh_4rf1f"]
-size = Vector3(0.17, 0.68, 0.19)
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_x7ndu"]
+radius = 0.085
+height = 0.68
+radial_segments = 24
+rings = 12
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_huqw6"]
 albedo_color = Color(0.0627451, 0.0784314, 0.109804, 1)
 roughness = 0.72
 
-[sub_resource type="BoxMesh" id="BoxMesh_aolpo"]
-size = Vector3(0.19, 0.15, 0.34)
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_l2oyd"]
+radius = 0.075
+height = 0.15
+radial_segments = 24
+rings = 12
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qohdj"]
 albedo_color = Color(0.12549, 0.160784, 0.211765, 1)
 roughness = 0.72
 
-[sub_resource type="BoxMesh" id="BoxMesh_ls46f"]
-size = Vector3(0.17, 0.68, 0.19)
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_gfces"]
+radius = 0.085
+height = 0.68
+radial_segments = 24
+rings = 12
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iidw2"]
 albedo_color = Color(0.0627451, 0.0784314, 0.109804, 1)
 roughness = 0.72
 
-[sub_resource type="BoxMesh" id="BoxMesh_m7pjl"]
-size = Vector3(0.19, 0.15, 0.34)
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_4rf1f"]
+radius = 0.075
+height = 0.15
+radial_segments = 24
+rings = 12
 
 [node name="PlayerBody" type="Node3D"]
 
@@ -48,15 +66,17 @@ size = Vector3(0.19, 0.15, 0.34)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.17, 0.14)
 
 [node name="@MeshInstance3D@1113" type="MeshInstance3D" parent="@Node3D@1112"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.604651, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_7b2o6")
-mesh = SubResource("BoxMesh_jdkhb")
+mesh = SubResource("CapsuleMesh_7b2o6")
 
 [node name="@Node3D@1114" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0.12)
 
 [node name="@MeshInstance3D@1115" type="MeshInstance3D" parent="@Node3D@1114"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.5625, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_x7ndu")
-mesh = SubResource("BoxMesh_l2oyd")
+mesh = SubResource("CapsuleMesh_jdkhb")
 
 [node name="LeftLeg" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12, 0.85, 0.13)
@@ -65,15 +85,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12, 0.85, 0.13)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.34, 0)
 
 [node name="@MeshInstance3D@1118" type="MeshInstance3D" parent="LeftLeg/@Node3D@1117"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.11765, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_gfces")
-mesh = SubResource("BoxMesh_4rf1f")
+mesh = SubResource("CapsuleMesh_x7ndu")
 
 [node name="@Node3D@1119" type="Node3D" parent="LeftLeg"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.77, -0.08)
 
 [node name="@MeshInstance3D@1120" type="MeshInstance3D" parent="LeftLeg/@Node3D@1119"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 2.26667, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_huqw6")
-mesh = SubResource("BoxMesh_aolpo")
+mesh = SubResource("CapsuleMesh_l2oyd")
 
 [node name="RightLeg" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12, 0.85, 0.13)
@@ -82,12 +104,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12, 0.85, 0.13)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.34, 0)
 
 [node name="@MeshInstance3D@1138" type="MeshInstance3D" parent="RightLeg/@Node3D@1137"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.11765, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_qohdj")
-mesh = SubResource("BoxMesh_ls46f")
+mesh = SubResource("CapsuleMesh_gfces")
 
 [node name="@Node3D@1139" type="Node3D" parent="RightLeg"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.77, -0.08)
 
 [node name="@MeshInstance3D@1140" type="MeshInstance3D" parent="RightLeg/@Node3D@1139"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 2.26667, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_iidw2")
-mesh = SubResource("BoxMesh_m7pjl")
+mesh = SubResource("CapsuleMesh_4rf1f")

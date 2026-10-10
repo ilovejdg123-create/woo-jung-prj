@@ -111,7 +111,12 @@ func _physics_process(delta: float) -> void:
 			game.play_step(global_position.z > 6 or absf(global_position.x) > 7)
 	legs[0].rotation.x = sin(stride) * tuning.leg_swing if moving else lerpf(legs[0].rotation.x, 0, delta * 12)
 	legs[1].rotation.x = -sin(stride) * tuning.leg_swing if moving else lerpf(legs[1].rotation.x, 0, delta * 12)
-	camera.position.y = sin(stride * 2) * tuning.head_bob if moving and bob_enabled else 0.0
+	var running = moving and Input.is_physical_key_pressed(KEY_SHIFT)
+	var bob_amount = tuning.run_bob if running else tuning.head_bob
+	var bob_target = sin(stride * 2) * bob_amount if moving and bob_enabled else 0.0
+	camera.position.y = lerpf(camera.position.y, bob_target, 1.0 - exp(-delta * 18))
+	camera.position.x = lerpf(camera.position.x, sin(stride) * bob_amount * 0.6 if moving and bob_enabled else 0.0, 1.0 - exp(-delta * 12))
+	camera.rotation.z = lerp_angle(camera.rotation.z, sin(stride) * tuning.run_roll if running and bob_enabled else 0.0, 1.0 - exp(-delta * 10))
 	for i in range(2):
 		var sign_x = -1.0 if i == 0 else 1.0
 		var shoulder = Vector3(sign_x * 0.24, -0.28, 0.09)

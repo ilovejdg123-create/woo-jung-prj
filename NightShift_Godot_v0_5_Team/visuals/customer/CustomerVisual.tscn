@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3]
+[gd_scene load_steps=42 format=3]
 
 [ext_resource type="Texture2D" path="res://visuals/customer/face.png" id="1_ikupx"]
 
@@ -6,8 +6,11 @@
 albedo_color = Color(0.552941, 0.470588, 0.407843, 1)
 roughness = 0.72
 
-[sub_resource type="BoxMesh" id="BoxMesh_podo4"]
-size = Vector3(0.45, 0.6, 0.25)
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ikupx"]
+radius = 0.225
+height = 0.6
+radial_segments = 24
+rings = 12
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gunfy"]
 albedo_color = Color(0.701961, 0.639216, 0.584314, 1)
@@ -52,36 +55,67 @@ rings = 20
 albedo_color = Color(0.156863, 0.207843, 0.258824, 1)
 roughness = 0.72
 
-[sub_resource type="BoxMesh" id="BoxMesh_lgqv1"]
-size = Vector3(0.17, 0.8, 0.2)
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_5n6ut"]
+radius = 0.085
+height = 0.8
+radial_segments = 24
+rings = 12
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_podo4"]
+albedo_color = Color(0.14902, 0.152941, 0.168627, 1)
+roughness = 0.72
+
+[sub_resource type="SphereMesh" id="SphereMesh_gunfy"]
+radial_segments = 32
+rings = 16
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dk4ca"]
 albedo_color = Color(0.552941, 0.470588, 0.407843, 1)
 roughness = 0.72
 
-[sub_resource type="BoxMesh" id="BoxMesh_4glit"]
-size = Vector3(0.14, 0.63, 0.18)
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_dmfpv"]
+radius = 0.07
+height = 0.63
+radial_segments = 24
+rings = 12
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_is2cx"]
 albedo_color = Color(0.156863, 0.207843, 0.258824, 1)
 roughness = 0.72
 
-[sub_resource type="BoxMesh" id="BoxMesh_8ttwh"]
-size = Vector3(0.17, 0.8, 0.2)
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_1b8vr"]
+radius = 0.085
+height = 0.8
+radial_segments = 24
+rings = 12
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_otlqi"]
+albedo_color = Color(0.14902, 0.152941, 0.168627, 1)
+roughness = 0.72
+
+[sub_resource type="SphereMesh" id="SphereMesh_t7v6d"]
+radial_segments = 32
+rings = 16
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_djvrm"]
 albedo_color = Color(0.552941, 0.470588, 0.407843, 1)
 roughness = 0.72
 
-[sub_resource type="BoxMesh" id="BoxMesh_tabph"]
-size = Vector3(0.14, 0.63, 0.18)
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_c71ui"]
+radius = 0.07
+height = 0.63
+radial_segments = 24
+rings = 12
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_img03"]
 albedo_color = Color(0.694118, 0.54902, 0.67451, 1)
 roughness = 0.72
 
-[sub_resource type="BoxMesh" id="BoxMesh_tksr4"]
-size = Vector3(0.18, 0.3, 0.18)
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_m4dpn"]
+radius = 0.09
+height = 0.3
+radial_segments = 24
+rings = 12
 
 [sub_resource type="Animation" id="Animation_ikupx"]
 length = 0.8
@@ -109,34 +143,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [0.0, 0.0, 0.0, 0.0, 0.0]
-}
-
-[sub_resource type="Animation" id="Animation_5n6ut"]
-length = 0.8
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("LeftLeg:rotation:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [0.0, 0.32, 3.91887e-17, -0.32, -7.83774e-17]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("RightLeg:rotation:x")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [0.0, -0.32, -3.91887e-17, 0.32, 7.83774e-17]
 }
 
 [sub_resource type="Animation" id="Animation_podo4"]
@@ -167,6 +173,34 @@ tracks/1/keys = {
 "values": [0.0, -0.5, -6.12323e-17, 0.5, 1.22465e-16]
 }
 
+[sub_resource type="Animation" id="Animation_5n6ut"]
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LeftLeg:rotation:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.32, 3.91887e-17, -0.32, -7.83774e-17]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RightLeg:rotation:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.32, -3.91887e-17, 0.32, 7.83774e-17]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gunfy"]
 _data = {
 &"idle": SubResource("Animation_ikupx"),
@@ -174,14 +208,55 @@ _data = {
 &"walk": SubResource("Animation_5n6ut")
 }
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2pmmp"]
+albedo_color = Color(0.552941, 0.470588, 0.407843, 1)
+roughness = 0.72
+
+[sub_resource type="SphereMesh" id="SphereMesh_yk1da"]
+radial_segments = 32
+rings = 16
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1bswe"]
+albedo_color = Color(0.552941, 0.470588, 0.407843, 1)
+roughness = 0.72
+
+[sub_resource type="SphereMesh" id="SphereMesh_tmntl"]
+radial_segments = 32
+rings = 16
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lgqv1"]
+albedo_color = Color(0.701961, 0.639216, 0.584314, 1)
+roughness = 0.72
+
+[sub_resource type="SphereMesh" id="SphereMesh_dk4ca"]
+radial_segments = 32
+rings = 16
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4glit"]
+albedo_color = Color(0.701961, 0.639216, 0.584314, 1)
+roughness = 0.72
+
+[sub_resource type="SphereMesh" id="SphereMesh_is2cx"]
+radial_segments = 32
+rings = 16
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ttwh"]
+albedo_color = Color(0.701961, 0.639216, 0.584314, 1)
+roughness = 0.72
+
+[sub_resource type="SphereMesh" id="SphereMesh_djvrm"]
+radial_segments = 32
+rings = 16
+
 [node name="CustomerVisual" type="Node3D"]
 
 [node name="@Node3D@1156" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
 
 [node name="@MeshInstance3D@1157" type="MeshInstance3D" parent="@Node3D@1156"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.555556, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_5n6ut")
-mesh = SubResource("BoxMesh_podo4")
+mesh = SubResource("CapsuleMesh_ikupx")
 
 [node name="CustomerFace" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.69, 0)
@@ -218,15 +293,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12, 0.9, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
 
 [node name="@MeshInstance3D@1161" type="MeshInstance3D" parent="LeftLeg/@Node3D@1160"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.17647, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_tmntl")
-mesh = SubResource("BoxMesh_lgqv1")
+mesh = SubResource("CapsuleMesh_5n6ut")
+
+[node name="Shoe" type="MeshInstance3D" parent="LeftLeg"]
+transform = Transform3D(0.2, 0, 0, 0, 0.15, 0, 0, 0, 0.33, 0, -0.8, -0.05)
+material_override = SubResource("StandardMaterial3D_podo4")
+mesh = SubResource("SphereMesh_gunfy")
 
 [node name="@Node3D@1162" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 1.05, 0)
 
 [node name="@MeshInstance3D@1163" type="MeshInstance3D" parent="@Node3D@1162"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.28571, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_dk4ca")
-mesh = SubResource("BoxMesh_4glit")
+mesh = SubResource("CapsuleMesh_dmfpv")
 
 [node name="RightLeg" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12, 0.9, 0)
@@ -235,24 +317,56 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12, 0.9, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
 
 [node name="@MeshInstance3D@1166" type="MeshInstance3D" parent="RightLeg/@Node3D@1165"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.17647, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_is2cx")
-mesh = SubResource("BoxMesh_8ttwh")
+mesh = SubResource("CapsuleMesh_1b8vr")
+
+[node name="Shoe" type="MeshInstance3D" parent="RightLeg"]
+transform = Transform3D(0.2, 0, 0, 0, 0.15, 0, 0, 0, 0.33, 0, -0.8, -0.05)
+material_override = SubResource("StandardMaterial3D_otlqi")
+mesh = SubResource("SphereMesh_t7v6d")
 
 [node name="@Node3D@1167" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 1.05, 0)
 
 [node name="@MeshInstance3D@1168" type="MeshInstance3D" parent="@Node3D@1167"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.28571, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_djvrm")
-mesh = SubResource("BoxMesh_tabph")
+mesh = SubResource("CapsuleMesh_c71ui")
 
 [node name="Carry" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.9, -0.2)
 
 [node name="@MeshInstance3D@1170" type="MeshInstance3D" parent="Carry"]
 material_override = SubResource("StandardMaterial3D_img03")
-mesh = SubResource("BoxMesh_tksr4")
+mesh = SubResource("CapsuleMesh_m4dpn")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_gunfy")
 }
+
+[node name="LeftShoulder" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.22, 0, 0, 0, 0.26, -0.23, 1.37, 0)
+material_override = SubResource("StandardMaterial3D_2pmmp")
+mesh = SubResource("SphereMesh_yk1da")
+
+[node name="RightShoulder" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.22, 0, 0, 0, 0.26, 0.23, 1.37, 0)
+material_override = SubResource("StandardMaterial3D_1bswe")
+mesh = SubResource("SphereMesh_tmntl")
+
+[node name="Neck" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.11, 0, 0, 0, 0.16, 0, 0, 0, 0.11, 0, 1.48, 0)
+material_override = SubResource("StandardMaterial3D_lgqv1")
+mesh = SubResource("SphereMesh_dk4ca")
+
+[node name="HandLeft" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.11, 0, 0, 0, 0.16, 0, 0, 0, 0.1, -0.3, 0.7, 0)
+material_override = SubResource("StandardMaterial3D_4glit")
+mesh = SubResource("SphereMesh_is2cx")
+
+[node name="HandRight" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.11, 0, 0, 0, 0.16, 0, 0, 0, 0.1, 0.3, 0.7, 0)
+material_override = SubResource("StandardMaterial3D_8ttwh")
+mesh = SubResource("SphereMesh_djvrm")

@@ -22,7 +22,7 @@ func run() -> void:
 	await physics_frame
 	check(game.world.has_node("EnvironmentVisual"), "Editable environment visual scene loaded")
 	check(game.customer.animator.has_animation("idle") and game.customer.animator.has_animation("walk") and game.customer.animator.has_animation("run"), "Visual animation contract exists")
-	check(is_equal_approx(game.player.tuning.run_speed, 3.6), "Player tuning resource loaded")
+	check(is_equal_approx(game.player.tuning.run_speed, 5.0), "Player tuning resource loaded")
 	check(game.customer.has_node("Visual/CustomerFace/PhotoFace"), "Original face photo material exists")
 	check(game.registry.pos.position.x < -4 and is_equal_approx(game.registry.pos.rotation.y, -PI / 2), "Left counter POS faces clerk on west side")
 	check(game.registry.cctv.position.z > game.registry.pos.position.z, "CCTV is to clerk right")
@@ -34,6 +34,33 @@ func run() -> void:
 	game.resume()
 	game.time.running = false
 	game.customer.set_process(false)
+	# Door sensor timing and actual sliding panels.
+	var initial_position = game.player.position
+	game.player.set_physics_process(false)
+	game.player.position = Vector3(0, 0.04, 7.5)
+	game.customer.visible = false
+	game.sensor_delay = 0
+	game.set_door(game.registry.front_door, false, true)
+	game._process(0.2)
+	check(not game.registry.front_door.door_open, "Sensor delay does not open instantly")
+	game._process(0.3)
+	check(game.registry.front_door.door_open, "Sensor opens after recognition delay")
+	game.set_door(game.registry.front_door, true, true)
+	check(is_equal_approx(game.registry.front_door.position.x, -1.95) and is_equal_approx(game.front_right_panel.position.x, 1.95), "Two door panels slide apart")
+	game.player.position = Vector3(0, 0.04, 11)
+	game._process(2.0)
+	check(game.registry.front_door.door_open, "Door holds open after leaving sensor")
+	game._process(1.1)
+	check(not game.registry.front_door.door_open, "Door closes after clear interval")
+	game.player.position = Vector3(0, 0.04, 6)
+	game._process(0.05)
+	check(game.registry.front_door.door_open, "Closing door reopens on obstruction")
+	game.set_door(game.registry.front_door, false, true)
+	game.player.position = initial_position
+	game.player.set_physics_process(true)
+	check(game.environment.reflected_light_source == Environment.REFLECTION_SOURCE_SKY, "Glass has sky reflection source")
+	check(game.player.tuning.run_bob > game.player.tuning.head_bob, "Run bob tuning exceeds walking bob")
+
 	# Exercise common interaction contract through both hands.
 	var left = game.registry.drink_0
 	var right = game.registry.drink_1
